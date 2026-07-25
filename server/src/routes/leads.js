@@ -6,7 +6,7 @@ const authorize = require('../middleware/authorize');
 
 const router = express.Router();
 
-const VALID_STATUSES = ['new', 'contacted', 'qualified', 'proposal_sent', 'won', 'lost'];
+const VALID_STATUSES = ['NEW', 'CONTACTED', 'QUALIFIED', 'PROPOSAL_SENT', 'NEGOTIATION', 'WON', 'LOST', 'NURTURE'];
 
 function logActivity(leadId, userId, action, details) {
   db.prepare(
