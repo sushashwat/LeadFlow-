@@ -175,3 +175,22 @@ describe('Data isolation between members', () => {
     expect(res.body.data[0].name).toBe('L1');
   });
 });
+
+test('a member cannot edit contact info on their own lead, only status', async () => {
+  const admin = createUser({ name: 'Ava Admin', email: 'ava@contact.dev', password: 'x', role: 'admin' });
+  const member = createUser({ name: 'Max Member', email: 'max@contact.dev', password: 'x', role: 'member' });
+
+  const lead = db.prepare(
+    `INSERT INTO leads (name, email, source, status, assigned_to) VALUES ('Original Name','orig@x.com','website','NEW', ?)`
+  ).run(member.id);
+
+  // Member tries to change contact info - should be silently ignored, not applied
+  const res = await request(app)
+    .patch(`/api/leads/${lead.lastInsertRowid}`)
+    .set('Authorization', `Bearer ${tokenFor(member)}`)
+    .send({ name: 'Hacked Name', status: 'CONTACTED' });
+
+  expect(res.status).toBe(200);
+  expect(res.body.data.name).toBe('Original Name'); // unchanged
+  expect(res.body.data.status).toBe('CONTACTED'); // status still went through
+});

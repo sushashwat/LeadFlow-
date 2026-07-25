@@ -124,12 +124,17 @@ router.patch(
     if (!canAccessLead(req.user, lead)) {
       return res.status(403).json({ error: 'You do not have access to this lead' });
     }
-
-    const fields = ['status', 'name', 'email', 'phone', 'company'];
+    // Members can only ever move status forward and nothing else - contact
+    // info corrections are admin-only, since a rep mistyping a client's
+    // email is a data-integrity risk we don't want left open to everyone.
+    const fields = req.user.role === 'admin'
+      ? ['status', 'name', 'email', 'phone', 'company']
+      : ['status'];
     const updates = {};
     for (const f of fields) {
       if (req.body[f] !== undefined) updates[f] = req.body[f];
     }
+    
     if (Object.keys(updates).length === 0) {
       return res.status(400).json({ error: 'No updatable fields provided' });
     }
