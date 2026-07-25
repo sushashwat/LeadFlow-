@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS leads (
   company TEXT,
   message TEXT,
   source TEXT NOT NULL DEFAULT 'website',
-  status TEXT NOT NULL DEFAULT 'new'
-    CHECK (status IN ('new','contacted','qualified','proposal_sent','won','lost')),
+  status TEXT NOT NULL DEFAULT 'NEW'
+    CHECK (status IN ('NEW','CONTACTED','QUALIFIED','PROPOSAL_SENT','NEGOTIATION','WON','LOST','NURTURE')),
   assigned_to INTEGER REFERENCES users(id),
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
