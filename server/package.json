@@ -7,8 +7,11 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node src/index.js",
+  "dev": "nodemon src/index.js",
+  "seed": "node src/db/seed.js",
+  "test": "cross-env NODE_ENV=test jest --runInBand"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
