@@ -98,7 +98,7 @@ describe('Route protection', () => {
     });
     const lead = db
       .prepare(
-        "INSERT INTO leads (name, email, source, status) VALUES ('Lead X','x@x.com','website','new')"
+        "INSERT INTO leads (name, email, source, status) VALUES ('Lead X','x@x.com','website','NEW')"
       )
       .run();
 
@@ -129,7 +129,7 @@ describe('Data isolation between members', () => {
     const lead = db
       .prepare(
         `INSERT INTO leads (name, email, source, status, assigned_to)
-         VALUES ('Lead Y','y@y.com','website','new', ?)`
+         VALUES ('Lead Y','y@y.com','website','NEW', ?)`
       )
       .run(memberA.id);
 
@@ -159,10 +159,10 @@ describe('Data isolation between members', () => {
     });
 
     db.prepare(
-      `INSERT INTO leads (name, email, source, status, assigned_to) VALUES ('L1','l1@x.com','website','new', ?)`
+      `INSERT INTO leads (name, email, source, status, assigned_to) VALUES ('L1','l1@x.com','website','NEW', ?)`
     ).run(memberA.id);
     db.prepare(
-      `INSERT INTO leads (name, email, source, status, assigned_to) VALUES ('L2','l2@x.com','website','new', ?)`
+      `INSERT INTO leads (name, email, source, status, assigned_to) VALUES ('L2','l2@x.com','website','NEW', ?)`
     ).run(memberB.id);
 
     // memberA tries to request memberB's leads via query param - should be ignored server-side

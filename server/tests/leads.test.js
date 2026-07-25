@@ -32,11 +32,11 @@ describe('Core flow: public capture -> assign -> status change -> notes -> activ
     expect(capture.status).toBe(201);
     const leadId = capture.body.leadId;
 
-    // New lead starts unassigned, status 'new'
+    // New lead starts unassigned, status 'NEW'
     let lead = await request(app)
       .get(`/api/leads/${leadId}`)
       .set('Authorization', `Bearer ${adminToken}`);
-    expect(lead.body.data.status).toBe('new');
+    expect(lead.body.data.status).toBe('NEW');
     expect(lead.body.data.assigned_to).toBeNull();
 
     // Member cannot see it yet - not assigned to them
@@ -63,9 +63,9 @@ describe('Core flow: public capture -> assign -> status change -> notes -> activ
     const statusChange = await request(app)
       .patch(`/api/leads/${leadId}`)
       .set('Authorization', `Bearer ${memberToken}`)
-      .send({ status: 'contacted' });
+      .send({ status: 'CONTACTED' });
     expect(statusChange.status).toBe(200);
-    expect(statusChange.body.data.status).toBe('contacted');
+    expect(statusChange.body.data.status).toBe('CONTACTED');
 
     // 4. Member adds a note
     const note = await request(app)
@@ -99,7 +99,7 @@ describe('Core flow: pagination and filtering', () => {
     });
     const adminToken = tokenFor(admin);
 
-    const statuses = ['new', 'new', 'contacted', 'won', 'lost', 'new'];
+    const statuses = ['NEW', 'NEW', 'CONTACTED', 'WON', 'LOST', 'NEW'];
     statuses.forEach((status, i) => {
       db.prepare(
         `INSERT INTO leads (name, email, source, status) VALUES (?, ?, 'website', ?)`
@@ -108,7 +108,7 @@ describe('Core flow: pagination and filtering', () => {
 
     // Filter by status=new should return exactly 3
     const filtered = await request(app)
-      .get('/api/leads?status=new')
+      .get('/api/leads?status=NEW')
       .set('Authorization', `Bearer ${adminToken}`);
     expect(filtered.status).toBe(200);
     expect(filtered.body.data.length).toBe(3);
