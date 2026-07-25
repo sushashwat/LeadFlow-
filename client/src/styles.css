@@ -1,15 +1,14 @@
 :root {
-  --ink: #2b241c;
-  --paper: #f2ebdf;
-  --card: #fbf7ef;
-  --line: #e6dcc8;
-  --indigo: #6b5233;
-  --indigo-dark: #4a3820;
-  --amber: #b9812f;
-  --teal: #4f7a5f;
-  --red: #a2402f;
-  --muted: #8a7e68;
-  --shadow: 0 2px 10px rgba(75, 56, 32, 0.08), 0 1px 2px rgba(75, 56, 32, 0.06);
+  --ink: #2a2320;
+--paper: #f0e6dc;
+--card: #faf3ec;
+--line: #e3d2c1;
+--indigo: #9c4f3a;
+--indigo-dark: #6e3527;
+--amber: #c78a3e;
+--teal: #56736b;
+--red: #a13a2e;
+--muted: #8f7f6e;
 }
 
 * {
@@ -174,8 +173,56 @@ button.secondary {
 .dashboard-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  margin: 0 -1.5rem 2rem;
+  padding: 1.75rem 2rem;
+  background: linear-gradient(135deg, var(--indigo-dark), var(--indigo));
+  color: var(--card);
+  border-radius: 20px;
+}
+
+.dashboard-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.dashboard-header .logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(251, 247, 239, 0.15);
+  border: 1px solid rgba(251, 247, 239, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.dashboard-header h1 {
+  color: var(--card);
+  letter-spacing: 0.01em;
+  font-size: 1.35rem;
+  margin: 0;
+}
+
+.dashboard-header .subtitle {
+  color: rgba(251, 247, 239, 0.65);
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+}
+
+.dashboard-header button.secondary {
+  border-color: rgba(251, 247, 239, 0.35);
+  color: var(--card);
+  background: rgba(251, 247, 239, 0.08);
+}
+
+.dashboard-header button.secondary:hover {
+  background: rgba(251, 247, 239, 0.18);
 }
 
 .toolbar {
@@ -294,16 +341,34 @@ button.secondary {
 
 /* Lead detail */
 .back-link {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
   text-decoration: none;
   font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+.back-link:hover {
+  background: var(--indigo-dark);
+  color: var(--card);
 }
 
 .lead-detail-grid {
   display: grid;
   gap: 1.25rem;
+}
+
+.lead-detail-grid .card:first-child h1 {
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--amber);
+  margin-bottom: 1rem;
 }
 
 .lead-facts {

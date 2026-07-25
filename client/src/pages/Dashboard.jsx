@@ -54,11 +54,14 @@ export default function Dashboard() {
   return (
     <div className="page dashboard">
       <header className="dashboard-header">
-        <div>
-          <h1>LeadFlow</h1>
-          <p className="subtitle">
-            Signed in as {user.name} ({user.role})
-          </p>
+        <div className="header-left">
+          <div className="logo-mark">LF</div>
+          <div>
+            <h1>LeadFlow</h1>
+            <p className="subtitle">
+              Signed in as {user.name} ({user.role})
+            </p>
+          </div>
         </div>
         <button className="secondary" onClick={logout}>
           Sign out
