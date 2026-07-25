@@ -28,7 +28,7 @@ router.post(
     const result = db
       .prepare(
         `INSERT INTO leads (name, email, phone, company, message, source, status)
-         VALUES (?, ?, ?, ?, ?, 'website', 'new')`
+         VALUES (?, ?, ?, ?, ?, 'website', 'NEW')`
       )
       .run(name, email, phone, company, message);
 
