@@ -6,9 +6,9 @@ Public capture form → authenticated CRM with role-based permissions → an
 8-stage sales pipeline, notes, and an audit trail. Built to be run by a
 small sales team, not just demoed.
 
-**Live URL:** _add after deploying_
-**Repo:** _add your GitHub URL here_
-
+**Live app:** https://lead-flow-alpha-teal.vercel.app/
+**Live API:** https://leadflow-api-qona.onrender.com
+**Repo:** https://github.com/sushashwat/LeadFlow-...
 ---
 
 ## Stack, and why
@@ -122,6 +122,9 @@ lead lifecycle and pagination/filtering.
 - No rate limiting yet on `/api/auth/login` or the public capture endpoint.
 - `node:sqlite` is still an experimental Node API as of this writing — fine
   for this scope, but I'd re-evaluate before using it in a larger production system.
+- Deployed on Render's free tier, which spins down after 15 minutes idle —
+  the first request after a gap has a 15-30s cold-start delay while it wakes
+  back up. A paid tier or a scheduled keep-alive ping would fix this.
 
 ## AI usage disclosure
 
